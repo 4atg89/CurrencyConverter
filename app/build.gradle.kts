@@ -14,14 +14,15 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            buildConfigField("String", "BASE_URL", "\"https://developers.paysera.com\"")
+        }
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "BASE_URL", "\"http://localhost\"")
         }
     }
     buildFeatures {
@@ -34,6 +35,7 @@ android {
 dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:base"))
+    implementation(project(":data:network"))
     implementation(project(":ui:converter"))
     implementation(libs.navigation.fragment)
     implementation(libs.appcompat)

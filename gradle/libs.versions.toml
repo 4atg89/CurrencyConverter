@@ -18,10 +18,12 @@ navigationVersion = "2.7.5"
 koinVersion = "4.0.0"
 #Logger
 timberVersion = "5.0.1"
-
-#private const val compatVersion = "1.4.1"
-#private const val fragmentKtx = "androidx.fragment:fragment-ktx:$compatVersion"
-#private const val appcompat = "androidx.appcompat:appcompat:$compatVersion"
+#Network
+retrofitVersion = "2.11.0"
+okhttpVersion = "4.12.0"
+serializationConverterVersion = "1.0.0"
+#Serialization
+kotlinxSerializationVersion = "1.7.3"
 
 [libraries]
 android-tools-build-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
@@ -38,6 +40,13 @@ di-koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "ko
 di-koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
 #Logger
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timberVersion" }
+#Network
+network = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion" }
+logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpVersion" }
+serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "serializationConverterVersion" }
+#Serialization
+kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationVersion" }
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -66,3 +75,4 @@ atg-kotlin-library = { id = "atg.kotlin.library", version = "unspecified" }
 
 [bundles]
 di-koin = ["di-koin-core", "di-koin-android"]
+network = ["network", "okhttp", "logging-interceptor", "serialization-converter"]

@@ -9,6 +9,9 @@ class ConverterViewModel(private val marketInteractor: MarketInteractor) : BaseV
     val state = SingleFlowEvent<String>()
 
     fun fetch() {
-        state.tryEmit(marketInteractor.removeLater())
+        launchOn {
+            val a = marketInteractor.currencies()
+            state.tryEmit(a)
+        }
     }
 }

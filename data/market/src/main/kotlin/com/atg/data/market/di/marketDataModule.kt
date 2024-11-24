@@ -5,5 +5,5 @@ import com.atg.domain.MarketRepository
 import org.koin.dsl.module
 
 val marketDataModule = module {
-    single<MarketRepository> { MarketRepositoryImpl() }
+    single<MarketRepository> { MarketRepositoryImpl(get()) }
 }

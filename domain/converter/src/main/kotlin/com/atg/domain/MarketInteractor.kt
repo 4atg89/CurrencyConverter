@@ -1,12 +1,12 @@
 package com.atg.domain
 
 interface MarketInteractor {
-    fun removeLater(): String
+    suspend fun currencies(): String
 }
 
 class MarketInteractorImpl(private val marketRepository: MarketRepository) : MarketInteractor {
 
-    override fun removeLater(): String {
-        return marketRepository.removeLater()
+    override suspend fun currencies(): String {
+        return marketRepository.currencies()
     }
 }
