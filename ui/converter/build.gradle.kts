@@ -8,6 +8,7 @@ dependencies {
     implementation(project(":data:market"))
     implementation(project(":domain:converter"))
     implementation(libs.coroutines.core)
+    implementation(libs.bundles.di.koin)
     implementation(libs.material)
     implementation(libs.appcompat)
     implementation(libs.fragment.ktx)

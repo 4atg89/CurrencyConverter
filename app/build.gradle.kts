@@ -32,9 +32,13 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:common"))
+    implementation(project(":core:base"))
     implementation(project(":ui:converter"))
     implementation(libs.navigation.fragment)
     implementation(libs.appcompat)
+    implementation(libs.bundles.di.koin)
+    implementation(libs.timber)
 
     //todo remove later on
     implementation(libs.androidx.core.ktx)

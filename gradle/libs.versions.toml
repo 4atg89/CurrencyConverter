@@ -14,6 +14,10 @@ coroutines = "1.8.1"
 fragmentXVersion = "1.8.5"
 compatVersion = "1.6.1"
 navigationVersion = "2.7.5"
+#DI
+koinVersion = "4.0.0"
+#Logger
+timberVersion = "5.0.1"
 
 #private const val compatVersion = "1.4.1"
 #private const val fragmentKtx = "androidx.fragment:fragment-ktx:$compatVersion"
@@ -26,9 +30,14 @@ kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-p
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
 #AppCompat
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "compatVersion" }
-fragment-ktx =  { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentXVersion" }
+fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentXVersion" }
 material = { group = "com.google.android.material", name = "material", version.ref = "compatVersion" }
 navigation_fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationVersion" }
+#DI
+di-koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koinVersion" }
+di-koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koinVersion" }
+#Logger
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timberVersion" }
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -55,3 +64,5 @@ atg-android-application = { id = "atg.android.app", version = "unspecified" }
 atg-android-library = { id = "atg.android.library", version = "unspecified" }
 atg-kotlin-library = { id = "atg.kotlin.library", version = "unspecified" }
 
+[bundles]
+di-koin = ["di-koin-core", "di-koin-android"]

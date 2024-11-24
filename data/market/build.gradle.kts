@@ -4,4 +4,5 @@ plugins {
 
 dependencies {
     implementation(project(":domain:converter"))
+    implementation(libs.di.koin.core)
 }
