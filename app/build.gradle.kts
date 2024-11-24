@@ -1,16 +1,13 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.atg.android.application)
     alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.atg.currencyconverter"
-    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.atg.currencyconverter"
-        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -27,20 +24,19 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
     buildFeatures {
+        viewBinding = true
+        dataBinding = true
         compose = true
     }
 }
 
 dependencies {
+    implementation(project(":ui:converter"))
+    implementation(libs.navigation.fragment)
+    implementation(libs.appcompat)
 
+    //todo remove later on
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

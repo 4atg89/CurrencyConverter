@@ -145,3 +145,5 @@ freeline_project_description.json
 /.idea/vcs.xml
 
 /app/release/output-metadata.json
+
+.kotlin

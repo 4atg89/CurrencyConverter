@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-common")
     repositories {
         google {
             content {
@@ -11,6 +12,8 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -21,4 +24,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "CurrencyConverter"
 include(":app")
- 
+include(":core:common", ":core:base")
+include(":ui:converter", ":domain:converter")
+include(":data:network")
+include(":data:market")
