@@ -10,4 +10,5 @@ sealed interface ConverterAction {
 sealed interface Effect {
     class CurrencyList(val isSell: Boolean, val currencies: List<String>) : Effect
     class ExchangeResult(val title: String, val message: String) : Effect
+    class OperationFailed(val title: String, val message: String) : Effect
 }

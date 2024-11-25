@@ -32,7 +32,7 @@ internal class ExchengerPrefsImpl(private val prefs: SharedPreferences) : Exchan
             if (newSell == 0f) remove(sell.first) else putFloat(sell.first, newSell)
             putFloat(receive.first, newReceive)
         }
-        operationCount -= 1
+        operationCount += 1
         balance.value = savedBalance
     }
 

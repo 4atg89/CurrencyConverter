@@ -5,7 +5,6 @@ import com.atg.base.BaseViewModelImpl
 import com.atg.common.alias.SingleFlowEvent
 import com.atg.domain.MarketInteractor
 import com.atg.domain.account.AccountInteractor
-import com.atg.domain.account.AccountRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -55,7 +54,11 @@ class ConverterViewModel(
                 marketInteractor.currencies()
             }
         }
-        marketInteractor.currency.onEach { currencies.set(it) }.launchIn(scope)
+        marketInteractor.currency.onEach {
+            currencies.set(it)
+            if (state.value.inputEnabled.not())
+                _state.value = state.value.copy(inputEnabled = it.isNotEmpty())
+        }.launchIn(scope)
     }
 
     private fun ConverterAction.ChangeCurrencyAction.currencyList() {
@@ -72,10 +75,13 @@ class ConverterViewModel(
 
     private fun ConverterAction.SubmitCurrencyAction.submit() {
         launchOn {
-            val converted = marketInteractor.exchange(sell.name, sell.balance, receive.name)
+            val converted = marketInteractor.exchange(sell.name, accountRepository.balance.value[sell.name]!!, sell.balance, receive.name)
             val result = converted.convertedAmount.toFloat()
-            accountRepository.currencyBought(sell = sell.name to sell.balance, receive = receive.name to result)
+            accountRepository.currencyBought(sell = sell.name to sell.balance + converted.fee, receive = receive.name to result)
             _effect.tryEmit(Effect.ExchangeResult(converted.title, converted.message))
+        }.invokeOnCompletion {
+            if (it == null) return@invokeOnCompletion
+            _effect.tryEmit(Effect.OperationFailed("Operation Failed", "Not enough money on the Account"))
         }
     }
 

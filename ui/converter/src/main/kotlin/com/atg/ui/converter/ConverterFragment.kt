@@ -49,7 +49,7 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding>(R.layout.fragme
     private fun bind(state: ConverterModelState) {
         adapter.submitList(state.balance)
 
-        binding.sellCurrency.setText(decimalFormat.format(state.currentSell.balance))
+        binding.sellCurrency.isEnabled = state.inputEnabled
         binding.selectedSellCurrency.text = state.currentSell.name
 
         binding.receiveCurrency.text = decimalFormat.format(state.currentReceive.balance)
@@ -88,6 +88,7 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding>(R.layout.fragme
     private fun sideEffect(effect: Effect) = when(effect){
         is Effect.CurrencyList -> effect.showCurrencyDialog()
         is Effect.ExchangeResult -> effect.showExchangeResult()
+        is Effect.OperationFailed -> effect.showOperationFailed()
     }
 
     private fun Effect.ExchangeResult.showExchangeResult() {
@@ -95,6 +96,14 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding>(R.layout.fragme
             title(text = title)
             message(text = message)
             positiveButton(R.string.converter_done)
+        }
+    }
+
+    private fun Effect.OperationFailed.showOperationFailed() {
+        MaterialDialog(requireContext()).show {
+            title(text = title)
+            message(text = message)
+            positiveButton(android.R.string.ok)
         }
     }
 
