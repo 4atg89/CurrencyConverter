@@ -62,7 +62,7 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding>(R.layout.fragme
         binding.receiveCurrency.text = decimalFormat.format(state.currentReceive.balance)
         binding.selectedReceiveCurrency.text = state.currentReceive.name
 
-        binding.submit.throttleClick { updateExchangeData() }
+        binding.submit.throttleClick { submitExchangeData() }
         binding.selectedSellCurrency.clicks { currencyDialogRequest(true) }
         binding.selectedReceiveCurrency.clicks { currencyDialogRequest(false) }
     }
@@ -80,6 +80,16 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding>(R.layout.fragme
         val sell = BalanceAppModel(sellName, sellBalance.toFloat())
         val receive = BalanceAppModel(receiveName, receiveBalance.toFloat())
         viewModel.process(ConverterAction.NewExchangeDataAction(sell = sell, receive = receive))
+    }
+
+    private fun submitExchangeData() {
+        val sellName: String = binding.selectedSellCurrency.text.toString()
+        val sellBalance: String = binding.sellCurrency.text!!.toString().ifEmpty { "0.0" }
+        val receiveName: String = binding.selectedReceiveCurrency.text.toString()
+        val receiveBalance: String = binding.receiveCurrency.text.toString()
+        val sell = BalanceAppModel(sellName, sellBalance.toFloat())
+        val receive = BalanceAppModel(receiveName, receiveBalance.toFloat())
+        viewModel.process(ConverterAction.SubmitCurrencyAction(sell = sell, receive = receive))
     }
 
     private fun sideEffect(effect: Effect) = when(effect){

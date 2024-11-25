@@ -36,6 +36,7 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:base"))
     implementation(project(":data:network"))
+    implementation(project(":data:storage:impl"))
     implementation(project(":ui:converter"))
     implementation(libs.navigation.fragment)
     implementation(libs.appcompat)

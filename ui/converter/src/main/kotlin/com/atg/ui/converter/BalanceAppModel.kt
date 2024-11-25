@@ -5,10 +5,9 @@ data class ConverterModelState(
     val currentSell: BalanceAppModel,
     val currentReceive: BalanceAppModel
 ) {
-    //todo remove
     companion object {
-        val default = ConverterModelState(
-            emptyList(),
+        fun default(balance: Map<String, Float>) = ConverterModelState(
+            balance = balance.map { BalanceAppModel(it.key, it.value) },
             BalanceAppModel("EUR", 0f),
             BalanceAppModel("USD", 0f)
         )
