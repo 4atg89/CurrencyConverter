@@ -1,5 +1,6 @@
 package com.atg.ui.converter
 
+import android.annotation.SuppressLint
 import android.icu.text.DecimalFormat
 import android.icu.text.DecimalFormatSymbols
 import android.os.Bundle
@@ -94,6 +95,7 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding>(R.layout.fragme
         }
     }
 
+    @SuppressLint("CheckResult")
     private fun Effect.CurrencyList.showCurrencyDialog() {
         MaterialDialog(requireContext()).show {
             message(R.string.converter_select_currency)
