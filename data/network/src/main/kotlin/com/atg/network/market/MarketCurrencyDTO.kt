@@ -6,6 +6,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class MarketCurrencyDTO(
-    @SerialName("base") val base: String,
     @SerialName("rates") val rates: Map<String, BigDecimalAlias>,
 )

@@ -33,6 +33,6 @@ class BalanceAdapter :
             oldItem.name == newItem.name
 
         override fun areContentsTheSame(oldItem: BalanceAppModel, newItem: BalanceAppModel): Boolean =
-            true
+            oldItem.balance == newItem.balance
     }
 }

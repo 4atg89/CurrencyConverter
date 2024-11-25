@@ -1,22 +1,27 @@
 package com.atg.data.market
 
 import com.atg.domain.ConversionResultModel
-import com.atg.domain.CurrencyModel
 import com.atg.domain.MarketRepository
 import com.atg.network.market.MarketService
+import kotlinx.coroutines.flow.MutableStateFlow
 import java.math.BigDecimal
 import java.math.RoundingMode
 
 class MarketRepositoryImpl(private val marketService: MarketService) : MarketRepository {
 
-    override suspend fun currencies(): CurrencyModel =
-        marketService.currencies().let { CurrencyModel(it.base, it.rates) }
+    override val currency = MutableStateFlow<Map<String, BigDecimal>>(emptyMap())
+
+    override suspend fun currencies() {
+        //this is just not to ddos be as values same each time
+        if (currency.value.isEmpty()) marketService.currencies().let { currency.value = it.rates }
+        else currency.value = currency.value
+    }
 
     override suspend fun exchange(sellName: String, conversionAmount: Float, receiveName: String, fee: Float?): ConversionResultModel {
-        val actual = marketService.currencies()
-        val rate = actual.rates[sellName] ?: error("something went wrong")
+        val rates = currency.value
+        val rate = rates[sellName] ?: error("something went wrong")
         val baseRate = BigDecimal(conversionAmount.toString()).divide(rate, 2, RoundingMode.DOWN)
-        val receiveRate = actual.rates[receiveName] ?: error("something went wrong")
+        val receiveRate = rates[receiveName] ?: error("something went wrong")
 
         //expect that from be
         val title = "CurrencyConverted"

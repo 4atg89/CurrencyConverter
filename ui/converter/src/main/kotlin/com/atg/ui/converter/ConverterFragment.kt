@@ -11,7 +11,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItems
 import com.atg.base.BaseFragment
 import com.atg.base.extension.dimen
-import com.atg.base.listeners.afterTextChangeEager
 import com.atg.base.listeners.clicks
 import com.atg.base.listeners.textChangeDebounce
 import com.atg.base.listeners.throttleClick
@@ -44,12 +43,6 @@ class ConverterFragment : BaseFragment<FragmentConverterBinding>(R.layout.fragme
 
     private fun EditText.bindInput() {
         filters = arrayOf(CurrencyInputFilter(), InputFilter.LengthFilter(10))
-        afterTextChangeEager {
-            val currentText = text!!.toString()
-            setSelection(currentText.length)
-            // not best decision but fast
-            if (currentText.startsWith("00")) setText("0.0")
-        }
         textChangeDebounce(debounce = 1000) { updateExchangeData() }
     }
 

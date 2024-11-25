@@ -1,11 +1,17 @@
 package com.atg.domain.account
 
+import kotlinx.coroutines.flow.StateFlow
+
 interface AccountInteractor {
-    var balance: Map<String, Float>
+    fun currencyBought(sell: Pair<String, Float>, receive: Pair<String, Float>)
+    val balance: StateFlow<Map<String, Float>>
 }
 
 class AccountInteractorImpl(private val accountRepository: AccountRepository) : AccountInteractor {
-    override var balance: Map<String, Float>
-        get() = accountRepository.balance
-        set(value) { accountRepository.balance = value }
+
+    override fun currencyBought(sell: Pair<String, Float>, receive: Pair<String, Float>) {
+        accountRepository.currencyBought(sell = sell, receive = receive)
+    }
+
+    override val balance get() = accountRepository.balance
 }
