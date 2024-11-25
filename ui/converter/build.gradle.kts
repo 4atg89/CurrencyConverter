@@ -12,4 +12,5 @@ dependencies {
     implementation(libs.material)
     implementation(libs.appcompat)
     implementation(libs.fragment.ktx)
+    implementation(libs.material.dialog)
 }

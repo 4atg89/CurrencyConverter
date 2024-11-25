@@ -24,6 +24,8 @@ okhttpVersion = "4.12.0"
 serializationConverterVersion = "1.0.0"
 #Serialization
 kotlinxSerializationVersion = "1.7.3"
+#Dialog
+materialDialogsVersion = "3.3.0"
 
 [libraries]
 android-tools-build-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
@@ -47,6 +49,8 @@ logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-intercep
 serialization-converter = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "serializationConverterVersion" }
 #Serialization
 kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationVersion" }
+#Dialog
+material-dialog = {group = "com.afollestad.material-dialogs", name = "core", version.ref = "materialDialogsVersion"}
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="converter_my_balance">My Balances</string>
+    <string name="converter_currency_exchange">Currency Exchange</string>
+    <string name="converter_sell">Sell</string>
+    <string name="converter_receive">Receive</string>
+    <string name="converter_submit">Submit</string>
+    <string name="converter_select_currency">Select Currency</string>
+    <string name="converter_done">Done</string>
+</resources>

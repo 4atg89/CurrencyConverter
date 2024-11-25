@@ -1,5 +1,5 @@
 package com.atg.domain
 
 interface MarketRepository {
-    suspend fun currencies(): String
+    suspend fun currencies(): CurrencyModel
 }
